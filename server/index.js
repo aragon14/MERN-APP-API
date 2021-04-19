@@ -1,8 +1,19 @@
-const http = require("http");
-const express = require("express");
+require("dotenv").config();
+import http from "http";
+import mongoose from "mongoose";
+import app from "./app";
 
-const app = express();
+const port = process.env.PORT || 3000;
 const server = http.createServer(app);
-server.listen(3000, () =>
-  console.log("🚀 API running on http://localhost:3000")
-);
+
+(async () => {
+  mongoose.set("useCreateIndex", true);
+  await mongoose.connect(process.env.DB_URI, {
+    useUnifiedTopology: true,
+  });
+  console.log("💿Database successfully connect");
+
+  server.listen(port, () => {
+    console.log(`🚀 API running on http://localhost:${port}`);
+  });
+})();

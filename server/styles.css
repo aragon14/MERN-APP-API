@@ -1,0 +1,6 @@
+[href] {
+  background-color: #fff;
+}
+[href^="items${1}"] {
+  background-color: #fff;
+}
